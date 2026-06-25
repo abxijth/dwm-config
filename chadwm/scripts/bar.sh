@@ -1,67 +1,30 @@
 #!/bin/dash
 
-# ^c$var^ = fg color
-# ^b$var^ = bg color
+# ^c$var^ = foreground color
+# ^b$var^ = background color
 
-interval=0
-
-# load colors
-. ~/.config/chadwm/scripts/bar_themes/tundra
+. "$HOME/.config/chadwm/scripts/bar_themes/gruvchad"
 
 cpu() {
-  cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
+    cpu_load=$(cut -d' ' -f1 /proc/loadavg)
 
-  printf "^c$black^ ^b$green^ CPU"
-  printf "^c$white^ ^b$grey^ $cpu_val ^b$black^"
-}
-
-pkg_updates() {
-  #updates=$({ timeout 20 doas xbps-install -un 2>/dev/null || true; } | wc -l) # void
-  updates=$({ timeout 20 checkupdates 2>/dev/null || true; } | wc -l) # arch
-  # updates=$({ timeout 20 aptitude search '~U' 2>/dev/null || true; } | wc -l)  # apt (ubuntu, debian etc)
-
-  if [ "$updates" -eq 0 ]; then
-    printf "  ^c$green^    Fully Updated"
-  else
-    printf "  ^c$white^    $updates updates"
-  fi
-}
-
-battery() {
-  val="$(cat /sys/class/power_supply/BAT1/capacity)"
-  printf "^c$black^ ^b$red^ BAT"
-  printf "^c$white^ ^b$grey^ $val ^b$black^"
-}
-
-brightness() {
-  printf "^c$red^   "
-  printf "^c$red^%.0f\n" $(cat /sys/class/backlight/*/brightness)
+    printf "^c$black^ ^b$green^ CPU"
+    printf "^c$white^ ^b$grey^ %s ^b$black^" "$cpu_load"
 }
 
 mem() {
-  printf "^c$red^^b$black^  "
-  printf "^c$red^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
-}
+    memory_used=$(free -m | awk '/^Mem:/ {printf "%.1fG", $3/1024}')
 
-wlan() {
-  case "$(cat /sys/class/net/wl*/operstate 2>/dev/null)" in
-    up) printf "^c$black^ ^b$blue^ 󰤨 ^d^%s" " ^c$blue^Connected" ;;
-    down) printf "^c$black^ ^b$blue^ 󰤭 ^d^%s" " ^c$blue^Disconnected" ;;
-  esac
+    printf "^c$black^ ^b$red^ MEM"
+    printf "^c$white^ ^b$grey^ %s ^b$black^" "$memory_used"
 }
 
 clock() {
-  printf "^c$black^ ^b$darkblue^ 󱑆 "
-  printf "^c$black^^b$blue^ $(date '+%H:%M')  "
+    printf "^c$black^ ^b$darkblue^ 󱑆 "
+    printf "^c$black^ ^b$blue^ %s ^b$black^" "$(date '+%H:%M')"
 }
 
-while true; do
-
-  if [ "$interval" -eq 0 ] || [ $((interval % 3600)) -eq 0 ]; then
-    updates="$(pkg_updates)"
-  fi
-
-  interval=$((interval + 1))
-
-  sleep 1 && xsetroot -name "$updates $(cpu) $(battery) $(mem) $(wlan) $(clock)"
+while :; do
+    xsetroot -name " $(cpu)$(mem)$(clock)"
+    sleep 1
 done

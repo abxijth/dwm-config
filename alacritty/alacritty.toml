@@ -1,0 +1,55 @@
+[window]
+opacity = 0.80
+padding = { x = 25, y = 25 }
+
+[font]
+size = 13.0
+normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font Mono", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font Mono", style = "Italic" }
+
+[colors.primary]
+foreground = "#e2e2e2"
+background = "#1e222a"
+
+[colors.selection]
+text = "#1e222a"
+background = "#6a7376"
+
+[colors.cursor]
+text = "#1e222a"
+cursor = "#e2e2e2"
+
+# -----------------------------
+# Normal colors (0–7)
+# -----------------------------
+[colors.normal]
+black   = "#22292b"
+red     = "#e06e6e"
+green   = "#8ccf7e"
+yellow  = "#e5c76b"
+blue    = "#67b0e8"
+magenta = "#c47fd5"
+cyan    = "#6da4cd"
+white   = "#c7cdcc"
+
+# -----------------------------
+# Bright colors (8–15)
+# -----------------------------
+[colors.bright]
+black   = "#6a6f73"
+red     = "#ef7d7d"
+green   = "#9bdead"
+yellow  = "#f4d67a"
+blue    = "#6cb5ed"
+magenta = "#ce89df"
+cyan    = "#67cbe7"
+white   = "#e0e0e0"
+
+# -----------------------------
+# Cursor + behavior
+# -----------------------------
+
+[cursor]
+style = "Block"
+blink_interval = 0

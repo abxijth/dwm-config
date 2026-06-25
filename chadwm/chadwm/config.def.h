@@ -41,7 +41,7 @@ static const int new_window_attach_on_end = 0; /*  1 means the new window will a
 static const char *fonts[]          = {"Iosevka:style:medium:size=12" ,"JetBrainsMono Nerd Font Mono:style:medium:size=19" };
 
 // theme
-#include "themes/tundra.h"
+#include "themes/gruvchad.h"
 
 static const char *colors[][3]      = {
     /*                     fg       bg      border */
@@ -152,9 +152,8 @@ static const Key keys[] = {
         SHCMD("maim --select | xclip -selection clipboard -t image/png")},
 
     { Mod1Mask,                         XK_space,   spawn,          SHCMD("rofi -show drun") },
-    { MODKEY,                           XK_q,       spawn,          SHCMD("st")},
-    { MODKEY,                           XK_e,       spawn,          SHCMD("thunar")},
-    { MODKEY,                           XK_w,       spawn,          SHCMD("firefox")},
+    { MODKEY,                           XK_q,       spawn,          SHCMD("alacritty")},
+    { MODKEY,                           XK_w,       spawn,          SHCMD("helium-browser")},
 
     // toggle stuff
     { MODKEY,                           XK_b,       togglebar,      {0} },
