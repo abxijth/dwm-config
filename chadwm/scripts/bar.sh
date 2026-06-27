@@ -3,7 +3,7 @@
 # ^c$var^ = foreground color
 # ^b$var^ = background color
 
-. "$HOME/.config/chadwm/scripts/bar_themes/gruvchad"
+. "$HOME/.config/chadwm/scripts/bar_themes/tundra"
 
 cpu() {
     cpu_load=$(cut -d' ' -f1 /proc/loadavg)
@@ -25,6 +25,6 @@ clock() {
 }
 
 while :; do
-    xsetroot -name " $(cpu)$(mem)$(clock)"
+    xsetroot -name "  $(cpu)$(mem)$(clock)"
     sleep 1
 done

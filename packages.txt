@@ -1,0 +1,11 @@
+xorg-xsetroot
+imlib2
+ttf-jetbrains-mono-nerd
+picom
+feh
+acpi
+rofi
+alacritty
+dash
+fastfetch
+xclip
