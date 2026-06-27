@@ -1,3 +1,5 @@
+xorg-server
+xorg-xinit
 xorg-xsetroot
 imlib2
 ttf-jetbrains-mono-nerd
