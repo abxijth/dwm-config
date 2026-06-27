@@ -1,5 +1,4 @@
 #!/bin/sh
-xrandr --output HDMI-2 --mode 1920x1080 --rate 74.97 &
 xrdb merge ~/.config/st/xresources
 xbacklight -set 10 &
 feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg &
