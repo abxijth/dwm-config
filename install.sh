@@ -19,6 +19,10 @@ fi
 echo "==> Installing Waterfox..."
 yay -S --needed --noconfirm waterfox-bin
 
+echo "==> Installing betterlockscreen..."
+yay -S --needed --noconfirm betterlockscreen
+betterlockscreen -u ~/Pictures/Wallpapers/lockscreen.jpg --fx blur
+
 echo "==> Installing Vim build dependencies..."
 sudo pacman -S --needed --noconfirm \
     git gcc make ncurses \

@@ -154,6 +154,7 @@ static const Key keys[] = {
     { Mod1Mask,                         XK_space,   spawn,          SHCMD("rofi -show drun") },
     { MODKEY,                           XK_q,       spawn,          SHCMD("alacritty")},
     { MODKEY,                           XK_w,       spawn,          SHCMD("waterfox")},
+    { MODKEY|ShiftMask,                 XK_l,       spawn,          SHCMD("betterlockscreen -l")},
 
     // toggle stuff
     { MODKEY,                           XK_b,       togglebar,      {0} },
