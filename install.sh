@@ -7,7 +7,7 @@ sudo pacman -Syu --needed --noconfirm $(<packages.txt)
 
 echo "==> Installing yay..."
 if ! command -v yay >/dev/null 2>&1; then
-    git clone https://aur.archlinux.org/yay.git
+    git clone https://aur.archlinux.org/yay.git --depth=1
     cd yay
     yes | makepkg -si
     cd ..
@@ -21,7 +21,6 @@ yay -S --needed --noconfirm waterfox-bin
 
 echo "==> Installing betterlockscreen..."
 yay -S --needed --noconfirm betterlockscreen
-betterlockscreen -u ~/Pictures/Wallpapers/lockscreen.jpg --fx blur
 
 echo "==> Installing Vim build dependencies..."
 sudo pacman -S --needed --noconfirm \
@@ -62,6 +61,24 @@ cp -rf fastfetch "$HOME/.config/"
 cp -rf picom "$HOME/.config/"
 cp -rf rofi "$HOME/.config/"
 cp -rf walls/* "$HOME/Pictures/Wallpapers/"
+
+echo "==> Enabling touchpad tap-to-click..."
+
+sudo mkdir -p /etc/X11/xorg.conf.d
+
+sudo tee /etc/X11/xorg.conf.d/30-touchpad.conf > /dev/null <<'EOF'
+Section "InputClass"
+    Identifier "touchpad"
+    MatchIsTouchpad "on"
+    Driver "libinput"
+    Option "Tapping" "on"
+    Option "NaturalScrolling" "false"
+    Option "ClickMethod" "clickfinger"
+EndSection
+EOF
+
+echo "==> Configuring betterlockscreen..."
+betterlockscreen -u "$HOME/Pictures/Wallpapers/lockscreen.jpg" --fx blur
 
 echo "==> Copying Vim configuration..."
 cp vimconfig/.vimrc "$HOME/.vimrc"
