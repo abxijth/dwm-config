@@ -60,7 +60,7 @@ cp -rf rofi "$HOME/.config/"
 cp -rf walls/* "$HOME/Pictures/Wallpapers/"
 
 echo "==> Copying Vim configuration..."
-cp vim/.vimrc "$HOME/.vimrc"
+cp vimconfig/.vimrc "$HOME/.vimrc"
 
 echo "==> Creating .xinitrc..."
 cat > "$HOME/.xinitrc" <<EOF
