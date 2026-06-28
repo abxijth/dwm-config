@@ -1,4 +1,5 @@
 #!/bin/sh
+#xrandr --output {OutputDevice} --mode {mode} --rate {framerate} 
 xrdb merge ~/.config/st/xresources
 xbacklight -set 10 &
 feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg &
