@@ -5,6 +5,20 @@ set -e
 echo "==> Installing packages..."
 sudo pacman -Syu --needed --noconfirm $(<packages.txt)
 
+echo "==> Installing yay..."
+if ! command -v yay >/dev/null 2>&1; then
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    yes | makepkg -si
+    cd ..
+    rm -rf yay
+else
+    echo "yay is already installed."
+fi
+
+echo "==> Installing Waterfox..."
+yay -S --needed --noconfirm waterfox-bin
+
 echo "==> Creating directories..."
 mkdir -p "$HOME/.config"
 mkdir -p "$HOME/Pictures/Wallpapers"
