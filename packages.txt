@@ -1,3 +1,4 @@
+base-devel
 xorg-server
 xorg-xinit
 xorg-xsetroot
