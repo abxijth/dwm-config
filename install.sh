@@ -19,6 +19,34 @@ fi
 echo "==> Installing Waterfox..."
 yay -S --needed --noconfirm waterfox-bin
 
+echo "==> Installing Vim build dependencies..."
+sudo pacman -S --needed --noconfirm \
+    git gcc make ncurses \
+    libx11 libxt libxpm
+
+echo "==> Building Vim with clipboard support..."
+if ! command -v vim >/dev/null 2>&1; then
+    git clone https://github.com/vim/vim --depth=1
+    cd vim
+
+    ./configure \
+        --with-features=huge \
+        --enable-multibyte \
+        --enable-terminal \
+        --enable-clipboard \
+        --without-xim \
+        --disable-gui \
+        --prefix=/usr/local
+
+    make -j"$(nproc)"
+    sudo make install
+
+    cd ..
+    rm -rf vim
+else
+    echo "Vim is already installed."
+fi
+
 echo "==> Creating directories..."
 mkdir -p "$HOME/.config"
 mkdir -p "$HOME/Pictures/Wallpapers"
@@ -30,6 +58,9 @@ cp -rf fastfetch "$HOME/.config/"
 cp -rf picom "$HOME/.config/"
 cp -rf rofi "$HOME/.config/"
 cp -rf walls/* "$HOME/Pictures/Wallpapers/"
+
+echo "==> Copying Vim configuration..."
+cp vim/.vimrc "$HOME/.vimrc"
 
 echo "==> Creating .xinitrc..."
 cat > "$HOME/.xinitrc" <<EOF
